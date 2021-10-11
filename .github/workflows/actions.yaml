@@ -1,0 +1,59 @@
+name: actions
+on: [push, pull_request]
+jobs:
+  actions:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    name: actions
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: Get-ChildItem -Force
+      - name: Run action
+        uses: ./
+        id: jjversion
+      - name: Display jjversion outputs
+        run: |
+          echo "Major: ${{ steps.jjversion.outputs.major }}"
+          echo "Minor: ${{ steps.jjversion.outputs.minor }}"
+          echo "Patch: ${{ steps.jjversion.outputs.patch }}"
+          echo "MajorMinorPatch: ${{ steps.jjversion.outputs.majorMinorPatch }}"
+          echo "Sha: ${{ steps.jjversion.outputs.sha }}"
+          echo "ShortSha: ${{ steps.jjversion.outputs.shortSha }}"
+
+  actions-skip-input:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    name: actions-skip-input
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: Get-ChildItem -Force
+      - uses: actions/setup-go@v2
+      - name: Run action
+        uses: ./
+        with:
+          skip-go-installation: true
+        id: jjversion
+      - name: Display jjversion outputs
+        run: |
+          echo "Major: ${{ steps.jjversion.outputs.major }}"
+          echo "Minor: ${{ steps.jjversion.outputs.minor }}"
+          echo "Patch: ${{ steps.jjversion.outputs.patch }}"
+          echo "MajorMinorPatch: ${{ steps.jjversion.outputs.majorMinorPatch }}"
+          echo "Sha: ${{ steps.jjversion.outputs.sha }}"
+          echo "ShortSha: ${{ steps.jjversion.outputs.shortSha }}"

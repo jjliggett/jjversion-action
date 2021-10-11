@@ -1,0 +1,9 @@
+name: "jjversion-action-version-parsing"
+description: "Parses the jjversion version"
+inputs:
+  version:
+    description: 'The version in JSON to parse.'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'

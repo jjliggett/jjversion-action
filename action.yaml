@@ -1,0 +1,88 @@
+name: "jjversion-action"
+description: "Creates a version for the repository using jjversion"
+author: "jjliggett"
+branding:
+  icon: "tag"
+  color: "blue"
+inputs:
+  skip-go-installation:
+    description: "If set to true, then the action uses pre-installed Go"
+    default: "false"
+    required: false
+outputs:
+  major:
+    description: "Major version"
+    value: ${{ steps.jjversion.outputs.major }}
+  minor:
+    description: "Minor version" 
+    value: ${{ steps.jjversion.outputs.minor }}
+  patch:
+    description: "Patch version"
+    value: ${{ steps.jjversion.outputs.patch }}
+  majorMinorPatch:
+    description: "MajorMinorPatch version"
+    value: ${{ steps.jjversion.outputs.majorMinorPatch }}
+  sha:
+    description: "Commit Sha"
+    value: ${{ steps.jjversion.outputs.sha }}
+  shortSha:
+    description: "ShortSha"
+    value: ${{ steps.jjversion.outputs.shortSha }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Go unless skip-go-installation is true
+      uses: ChristopherHX/conditional@3fce4b7a3171a839b482306f9fd3aba0c2112a24
+      with:
+        if: ${{ inputs.skip-go-installation == 'true' }}
+        step: |
+          uses: actions/setup-go@v2
+    - run: pwd
+      shell: pwsh
+    - run: go get -v -d github.com/jjliggett/jjversion/src
+      shell: pwsh
+    - run: printenv
+      shell: pwsh
+    - run: cd "$(go env GOPATH)/src/github.com/jjliggett/jjversion/src" && go build
+      shell: pwsh
+    - run: ls -r "$(go env GOPATH)/src/github.com/jjliggett/jjversion/src"
+      shell: pwsh
+    - run: |
+        if ($env:RUNNER_OS -eq "Windows")
+        {
+          cp "$(go env GOPATH)/src/github.com/jjliggett/jjversion/src/jjversion.exe" .
+        } else {
+          cp "$(go env GOPATH)/src/github.com/jjliggett/jjversion/src/jjversion" .
+        }
+      shell: pwsh
+
+    - run: ls
+      shell: pwsh
+    - run: |
+        if ($env:RUNNER_OS -eq "Windows")
+        {
+          ./jjversion.exe > jjversion-output.txt
+        } else {
+          ./jjversion > jjversion-output.txt
+        }
+      shell: pwsh
+    - run: echo "::set-output name=version::$(cat jjversion-output.txt)"
+      id: version
+      shell: pwsh
+    - run: cat jjversion-output.txt
+      shell: pwsh
+    - name: Run action
+      id: jjversion
+      uses: ./version-parsing/
+      with:
+        version: ${{ steps.version.outputs.version }}
+    - name: Display version outputs
+      run: |
+        echo "Major: ${{ steps.jjversion.outputs.major }}"
+        echo "Minor: ${{ steps.jjversion.outputs.minor }}"
+        echo "Patch: ${{ steps.jjversion.outputs.patch }}"
+        echo "MajorMinorPatch: ${{ steps.jjversion.outputs.majorMinorPatch }}"
+        echo "Sha: ${{ steps.jjversion.outputs.sha }}"
+        echo "ShortSha: ${{ steps.jjversion.outputs.shortSha }}"
+      shell: pwsh
