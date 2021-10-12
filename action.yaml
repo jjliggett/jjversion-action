@@ -72,9 +72,9 @@ runs:
       shell: pwsh
     - run: cat jjversion-output.txt
       shell: pwsh
-    - name: Run action
+    - name: Parse version
       id: jjversion
-      uses: ./version-parsing/
+      uses: jjliggett/jjversion-parsing-action@02eaeac93daa5bfd42a2d595c2ca3825ea486a94
       with:
         version: ${{ steps.version.outputs.version }}
     - name: Display version outputs
