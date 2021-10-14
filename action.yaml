@@ -38,26 +38,34 @@ runs:
         if: ${{ inputs.skip-go-installation == 'true' }}
         step: |
           uses: actions/setup-go@v2
-    - run: pwd
+    - run: go mod init local
       shell: pwsh
-    - run: go get -v -d github.com/jjliggett/jjversion/src
+    - run: go get -v -d github.com/jjliggett/jjversion/src@e9c73badb89723d11bb85ad103fe9bfed46c7057
       shell: pwsh
-    - run: printenv
-      shell: pwsh
-    - run: cd "$(go env GOPATH)/src/github.com/jjliggett/jjversion/src" && go build
-      shell: pwsh
-    - run: ls -r "$(go env GOPATH)/src/github.com/jjliggett/jjversion/src"
+    - run: |
+        cd "$(go env GOPATH)/pkg/mod/github.com/jjliggett/jjversion"
+        if ($env:RUNNER_OS -eq "Windows")
+        {
+          cd src*
+          echo "Building jjversion"
+          go build -o jjversion.exe
+        } else {
+          ls -al
+          chmod +w src*
+          ls -al
+          cd src*
+          echo "Building jjversion"
+          go build -a -v -o jjversion
+          cp jjversion $env:GITHUB_WORKSPACE/jjversion
+        }
       shell: pwsh
     - run: |
         if ($env:RUNNER_OS -eq "Windows")
         {
-          cp "$(go env GOPATH)/src/github.com/jjliggett/jjversion/src/jjversion.exe" .
-        } else {
-          cp "$(go env GOPATH)/src/github.com/jjliggett/jjversion/src/jjversion" .
+          cp "$(go env GOPATH)/pkg/mod/github.com/jjliggett/jjversion/src*/jjversion.exe" .
         }
       shell: pwsh
-
-    - run: ls
+    - run: printenv
       shell: pwsh
     - run: |
         if ($env:RUNNER_OS -eq "Windows")
