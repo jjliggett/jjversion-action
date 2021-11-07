@@ -57,9 +57,9 @@ Licensing can be found at: [LICENSE.md](LICENSE.md).
 
 The jjversion-action license applies to all parts of jjversion-action that are not externally maintained libraries and dependencies.
 
-The primary dependency of jjversion-action is jjversion, located at <https://github.com/jjliggett/jjversion>. Its license and the licenses for its dependencies can be found in the jjversion repository. This action installs jjversion from the GitHub jjliggett/jjversion repository.
+The primary dependency of jjversion-action 0s jjversion-gha-output, located at <https://github.com/jjliggett/jjversion-gha-output>. Its license can be found in that repository. This action installs jjversion-gha-output from the GitHub jjliggett/jjversion-gha-output repository.
 
-Another core dependency of jjversion-action is jjversion-parsing-action, located at <https://github.com/jjliggett/jjversion-parsing-action>. This is a JavaScript action which parses the version JSON outputed by jjversion. Its license and the license for its dependencies can be found in the jjversion-parsing-action repository.
+Another core dependency of jjversion-action is jjversion, which is a dependency of jjversion-gha-output. This is located at <https://github.com/jjliggett/jjversion>. Its license and the licenses for its dependencies can be found in the jjversion repository.
 
 Two external GitHub actions are used within the composite jjversion GitHub Action. These are:
 

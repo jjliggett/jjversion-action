@@ -40,29 +40,31 @@ runs:
           uses: actions/setup-go@v2
     - run: go mod init local
       shell: pwsh
-    - run: go get -v -d github.com/jjliggett/jjversion/src@e9c73badb89723d11bb85ad103fe9bfed46c7057
+    - run: go get -v -d github.com/jjliggett/jjversion-gha-output@9c0f517e6b33bae4c09f69b453a7929fada44f94
+      shell: pwsh
+    - run: ls "$(go env GOPATH)/pkg/mod/github.com/jjliggett"
       shell: pwsh
     - run: |
-        cd "$(go env GOPATH)/pkg/mod/github.com/jjliggett/jjversion"
+        cd "$(go env GOPATH)/pkg/mod/github.com/jjliggett"
         if ($env:RUNNER_OS -eq "Windows")
         {
-          cd src*
-          echo "Building jjversion"
-          go build -o jjversion.exe
+          cd jjversion-gha-output*
+          echo "Building jjversion-gha-output"
+          go build -o jjversion-gha-output.exe
         } else {
           ls -al
-          chmod +w src*
+          chmod +w jjversion-gha-output*
           ls -al
-          cd src*
-          echo "Building jjversion"
-          go build -a -v -o jjversion
-          cp jjversion $env:GITHUB_WORKSPACE/jjversion
+          cd jjversion-gha-output*
+          echo "Building jjversion-gha-output"
+          go build -a -v -o jjversion-gha-output
+          cp jjversion-gha-output $env:GITHUB_WORKSPACE/jjversion-gha-output
         }
       shell: pwsh
     - run: |
         if ($env:RUNNER_OS -eq "Windows")
         {
-          cp "$(go env GOPATH)/pkg/mod/github.com/jjliggett/jjversion/src*/jjversion.exe" .
+          cp "$(go env GOPATH)/pkg/mod/github.com/jjliggett/jjversion-gha-output*/jjversion-gha-output.exe" .
         }
       shell: pwsh
     - run: printenv
@@ -70,21 +72,12 @@ runs:
     - run: |
         if ($env:RUNNER_OS -eq "Windows")
         {
-          ./jjversion.exe > jjversion-output.txt
+          ./jjversion-gha-output.exe
         } else {
-          ./jjversion > jjversion-output.txt
+          ./jjversion-gha-output
         }
-      shell: pwsh
-    - run: echo "::set-output name=version::$(cat jjversion-output.txt)"
-      id: version
-      shell: pwsh
-    - run: cat jjversion-output.txt
-      shell: pwsh
-    - name: Parse version
       id: jjversion
-      uses: jjliggett/jjversion-parsing-action@02eaeac93daa5bfd42a2d595c2ca3825ea486a94
-      with:
-        version: ${{ steps.version.outputs.version }}
+      shell: pwsh
     - name: Display version outputs
       run: |
         echo "Major: ${{ steps.jjversion.outputs.major }}"
