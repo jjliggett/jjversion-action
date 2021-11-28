@@ -35,7 +35,7 @@ An example usage can be seen below:
 ```yaml
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@230611dbd0eb52da1e1f4f7bc8bb0c3a339fc8b7
         with:
           fetch-depth: 0
       - name: Get version

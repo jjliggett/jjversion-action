@@ -13,7 +13,7 @@ jobs:
         shell: pwsh
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@230611dbd0eb52da1e1f4f7bc8bb0c3a339fc8b7
         with:
           fetch-depth: 0
       - run: Get-ChildItem -Force
@@ -41,11 +41,11 @@ jobs:
         shell: pwsh
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@230611dbd0eb52da1e1f4f7bc8bb0c3a339fc8b7
         with:
           fetch-depth: 0
       - run: Get-ChildItem -Force
-      - uses: actions/setup-go@v2
+      - uses: actions/setup-go@02f7ea9f09887fd7fd6c77c49a0f72a2e8cde95c
       - name: Run action
         uses: ./
         with:

@@ -37,7 +37,7 @@ runs:
       with:
         if: ${{ inputs.skip-go-installation == 'true' }}
         step: |
-          uses: actions/setup-go@v2
+          uses: actions/setup-go@02f7ea9f09887fd7fd6c77c49a0f72a2e8cde95c
     - run: go mod init local
       shell: pwsh
     - run: go get -v -d github.com/jjliggett/jjversion-gha-output@9c0f517e6b33bae4c09f69b453a7929fada44f94
