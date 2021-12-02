@@ -33,11 +33,8 @@ runs:
   using: "composite"
   steps:
     - name: Setup Go unless skip-go-installation is true
-      uses: ChristopherHX/conditional@3fce4b7a3171a839b482306f9fd3aba0c2112a24
-      with:
-        if: ${{ inputs.skip-go-installation == 'true' }}
-        step: |
-          uses: actions/setup-go@02f7ea9f09887fd7fd6c77c49a0f72a2e8cde95c
+      uses: actions/setup-go@02f7ea9f09887fd7fd6c77c49a0f72a2e8cde95c
+      if: ${{ inputs.skip-go-installation == 'true' }}
     - run: go mod init local
       shell: pwsh
     - run: go get -v -d github.com/jjliggett/jjversion-gha-output@9c0f517e6b33bae4c09f69b453a7929fada44f94
