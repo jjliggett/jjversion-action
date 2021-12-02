@@ -46,7 +46,6 @@ jobs:
         with:
           fetch-depth: 0
       - run: Get-ChildItem -Force
-      - uses: actions/setup-go@02f7ea9f09887fd7fd6c77c49a0f72a2e8cde95c
       - name: Run action
         uses: ./
         with:
