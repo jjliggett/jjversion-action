@@ -61,9 +61,8 @@ The primary dependency of jjversion-action 0s jjversion-gha-output, located at <
 
 Another core dependency of jjversion-action is jjversion, which is a dependency of jjversion-gha-output. This is located at <https://github.com/jjliggett/jjversion>. Its license and the licenses for its dependencies can be found in the jjversion repository.
 
-Two external GitHub actions are used within the composite jjversion GitHub Action. These are:
+An external GitHub action is used within the composite jjversion GitHub Action. This is:
 
-- <https://github.com/ChristopherHX/conditional/tree/3fce4b7a3171a839b482306f9fd3aba0c2112a24>
 - <https://github.com/actions/setup-go> (conditional on input)
 
 In addition, several GitHub actions are used within workflows for the repository:
