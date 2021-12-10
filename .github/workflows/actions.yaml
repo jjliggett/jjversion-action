@@ -28,6 +28,7 @@ jobs:
           echo "MajorMinorPatch: ${{ steps.jjversion.outputs.majorMinorPatch }}"
           echo "Sha: ${{ steps.jjversion.outputs.sha }}"
           echo "ShortSha: ${{ steps.jjversion.outputs.shortSha }}"
+      - run: Get-ChildItem -Name
 
   actions-skip-go-install:
     strategy:
@@ -59,3 +60,5 @@ jobs:
           echo "MajorMinorPatch: ${{ steps.jjversion.outputs.majorMinorPatch }}"
           echo "Sha: ${{ steps.jjversion.outputs.sha }}"
           echo "ShortSha: ${{ steps.jjversion.outputs.shortSha }}"
+      - run: Get-ChildItem -Name
+
