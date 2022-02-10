@@ -39,7 +39,7 @@ runs:
       shell: pwsh
       if: ${{ inputs.skip-go-installation == 'true' }}
     - name: Setup Go unless skip-go-installation is true
-      uses: actions/setup-go@02f7ea9f09887fd7fd6c77c49a0f72a2e8cde95c
+      uses: actions/setup-go@bfdd3570ce990073878bf10f6b2d79082de49492
       if: ${{ inputs.skip-go-installation != 'true' }}
     - run: mkdir jjversion
       shell: pwsh
