@@ -29,7 +29,7 @@ An example usage can be seen below:
           fetch-depth: 0
       - name: Get version
         id: jjversion
-        uses: jjliggett/jjversion-action@620360b53e852c7316cbf9e233ea2a5de4f39f40
+        uses: jjliggett/jjversion-action@ce54a38a5fae3f0f2a96acc046b68c66d3822042
       - name: Display jjversion outputs
         run: |
           echo "Major: ${{ steps.jjversion.outputs.major }}"
@@ -50,11 +50,6 @@ The primary dependency of jjversion-action is jjversion-gha-output, located at <
 
 Another core dependency of jjversion-action is jjversion, which is a dependency of jjversion-gha-output. This is located at <https://github.com/jjliggett/jjversion>. Its license and the licenses for its dependencies can be found in the jjversion repository.
 
-An external GitHub action is used within the composite jjversion GitHub Action. This is:
-
-- <https://github.com/actions/setup-go> (conditional on input)
-
-In addition, several GitHub actions are used within workflows for the repository:
+In addition, a GitHub action is used within workflows for the repository:
 
 - <https://github.com/actions/checkout>
-- <https://github.com/actions/setup-go>
