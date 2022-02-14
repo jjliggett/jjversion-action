@@ -4,11 +4,6 @@ author: "jjliggett"
 branding:
   icon: "tag"
   color: "blue"
-inputs:
-  skip-go-installation:
-    description: "If set to true, then the action uses pre-installed Go"
-    default: "false"
-    required: false
 outputs:
   major:
     description: "Major version"
@@ -32,50 +27,24 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: echo "Setting up go"
-      shell: pwsh
-      if: ${{ inputs.skip-go-installation != 'true' }}
-    - run: echo "Skipping go setup"
-      shell: pwsh
-      if: ${{ inputs.skip-go-installation == 'true' }}
-    - name: Setup Go unless skip-go-installation is true
-      uses: actions/setup-go@bfdd3570ce990073878bf10f6b2d79082de49492
-      if: ${{ inputs.skip-go-installation != 'true' }}
-    - run: mkdir jjversion
-      shell: pwsh
-      working-directory: ${{ runner.temp }}
-    - run: go mod init local
-      shell: pwsh
-      working-directory: ${{ runner.temp }}/jjversion
-    - run: go get -v -d github.com/jjliggett/jjversion-gha-output@9c0f517e6b33bae4c09f69b453a7929fada44f94
-      shell: pwsh
-      working-directory: ${{ runner.temp }}/jjversion
-    - run: ls "$(go env GOPATH)/pkg/mod/github.com/jjliggett"
+    - run: echo $env:RUNNER_OS
       shell: pwsh
     - run: |
-        cd "$(go env GOPATH)/pkg/mod/github.com/jjliggett"
         if ($env:RUNNER_OS -eq "Windows")
         {
-          cd jjversion-gha-output*
-          echo "Building jjversion-gha-output"
-          go build -o jjversion-gha-output.exe
+          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/v0.2.0/jjversion-ghao.exe -L --output jjversion-gha-output.exe
+        } elseif ($env:RUNNER_OS -eq "macOS")
+        {
+          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/v0.2.0/jjversion-ghao-darwin -L --output jjversion-gha-output
+          chmod +x jjversion-gha-output
         } else {
-          ls -al
-          chmod +w jjversion-gha-output*
-          ls -al
-          cd jjversion-gha-output*
-          echo "Building jjversion-gha-output"
-          go build -a -v -o jjversion-gha-output
-          cp jjversion-gha-output $env:GITHUB_WORKSPACE/jjversion-gha-output
-        }
-      shell: pwsh
-    - run: |
-        if ($env:RUNNER_OS -eq "Windows")
-        {
-          cp "$(go env GOPATH)/pkg/mod/github.com/jjliggett/jjversion-gha-output*/jjversion-gha-output.exe" .
+          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/v0.2.0/jjversion-ghao -L --output jjversion-gha-output
+          chmod +x jjversion-gha-output
         }
       shell: pwsh
     - run: printenv
+      shell: pwsh
+    - run: ls
       shell: pwsh
     - run: |
         if ($env:RUNNER_OS -eq "Windows")

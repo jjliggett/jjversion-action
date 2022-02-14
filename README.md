@@ -6,17 +6,6 @@ jjversion-action is a composite GitHub action that uses the Go package [jjligget
 
 For this action to work properly, you must create a versioning.yaml file in your repository and checkout your repository in your workflow with ```fetch-depth: 0``` to fetch all history for all tags and branches. Configuration information for the versioning.yaml file can be found in the <https://github.com/jjliggett/jjversion> repository.
 
-### Inputs
-
-The action accepts the following input:
-
-```yaml
-  skip-go-installation:
-    description: "If set to true, then the action uses pre-installed Go"
-    default: "false"
-    required: false
-```
-
 ### Outputs
 
 The action creates the following outputs:
@@ -57,7 +46,7 @@ Licensing can be found at: [LICENSE.md](LICENSE.md).
 
 The jjversion-action license applies to all parts of jjversion-action that are not externally maintained libraries and dependencies.
 
-The primary dependency of jjversion-action 0s jjversion-gha-output, located at <https://github.com/jjliggett/jjversion-gha-output>. Its license can be found in that repository. This action installs jjversion-gha-output from the GitHub jjliggett/jjversion-gha-output repository.
+The primary dependency of jjversion-action is jjversion-gha-output, located at <https://github.com/jjliggett/jjversion-gha-output>. Its license can be found in that repository. This action downloads a GitHub Release executable binary from the jjliggett/jjversion-gha-output repository and executes it.
 
 Another core dependency of jjversion-action is jjversion, which is a dependency of jjversion-gha-output. This is located at <https://github.com/jjliggett/jjversion>. Its license and the licenses for its dependencies can be found in the jjversion repository.
 
