@@ -10,5 +10,5 @@ updates:
     reviewers:
       - "jjliggett"
     commit-message:
-      prefix: "patch"
+      prefix: "ci"
       include: "scope"
