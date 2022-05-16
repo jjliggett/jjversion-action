@@ -72,3 +72,15 @@ runs:
           rm ./jjversion-gha-output
         }
       shell: pwsh
+    - run: |
+        echo "# jjversion Summary" >> $env:GITHUB_STEP_SUMMARY
+        echo "" >> $env:GITHUB_STEP_SUMMARY
+        echo "## ${{ steps.jjversion.outputs.majorMinorPatch }}" >> $env:GITHUB_STEP_SUMMARY
+        echo "" >> $env:GITHUB_STEP_SUMMARY
+        echo "* MajorMinorPatch: ${{ steps.jjversion.outputs.majorMinorPatch }}" >> $env:GITHUB_STEP_SUMMARY
+        echo "* Major: ${{ steps.jjversion.outputs.major }}" >> $env:GITHUB_STEP_SUMMARY
+        echo "* Minor: ${{ steps.jjversion.outputs.minor }}" >> $env:GITHUB_STEP_SUMMARY
+        echo "* Patch: ${{ steps.jjversion.outputs.patch }}" >> $env:GITHUB_STEP_SUMMARY
+        echo "* Sha: ${{ steps.jjversion.outputs.sha }}" >> $env:GITHUB_STEP_SUMMARY
+        echo "* ShortSha: ${{ steps.jjversion.outputs.shortSha }}" >> $env:GITHUB_STEP_SUMMARY
+      shell: pwsh
