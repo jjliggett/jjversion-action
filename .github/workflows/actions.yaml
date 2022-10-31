@@ -1,5 +1,21 @@
 name: actions
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - README.md
+      - LICENSE.md
+      - 'docs/**'
+      - '.github/dependabot.yaml' 
+    branches:
+      - root
+  pull_request:
+    paths-ignore:
+      - README.md
+      - LICENSE.md
+      - 'docs/**'
+      - '.github/dependabot.yaml' 
+  workflow_dispatch:
+
 jobs:
   actions:
     strategy:
