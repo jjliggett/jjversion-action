@@ -32,13 +32,13 @@ runs:
     - run: |
         if ($env:RUNNER_OS -eq "Windows")
         {
-          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/v0.2.4/jjversion-ghao.exe -L --output jjversion-gha-output.exe
+          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/v0.3.0/jjversion-ghao.exe -L --output jjversion-gha-output.exe
         } elseif ($env:RUNNER_OS -eq "macOS")
         {
-          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/v0.2.4/jjversion-ghao-darwin -L --output jjversion-gha-output
+          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/v0.3.0/jjversion-ghao-darwin -L --output jjversion-gha-output
           chmod +x jjversion-gha-output
         } else {
-          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/v0.2.4/jjversion-ghao -L --output jjversion-gha-output
+          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/v0.3.0/jjversion-ghao -L --output jjversion-gha-output
           chmod +x jjversion-gha-output
         }
       shell: pwsh
