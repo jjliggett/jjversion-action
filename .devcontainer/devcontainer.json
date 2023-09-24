@@ -1,0 +1,18 @@
+{
+	"name": "jjversion-action-dc",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+	"features": {
+        "ghcr.io/devcontainers/features/common-utils:2.1.3": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"eamodio.gitlens"
+			]
+		}
+	},
+	"remoteUser": "vscode",
+	"remoteEnv": { "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}" }
+}
