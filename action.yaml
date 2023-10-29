@@ -31,7 +31,7 @@ runs:
       shell: pwsh
     - name: Download jjversion-gha-output GitHub Release executable
       env:
-        VERSION: v0.3.23
+        VERSION: v0.3.28
       run: |
         if ($env:RUNNER_OS -eq "Windows")
         {
