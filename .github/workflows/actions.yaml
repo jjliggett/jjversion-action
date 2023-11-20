@@ -47,3 +47,16 @@ jobs:
           echo "Sha: ${{ steps.jjversion.outputs.sha }}"
           echo "ShortSha: ${{ steps.jjversion.outputs.shortSha }}"
       - run: Get-ChildItem -Name
+      - name: Run action specifying version
+        uses: ./
+        id: jjversion2
+        with:
+          version: v0.3.30
+      - name: Display jjversion outputs
+        run: |
+          echo "Major: ${{ steps.jjversion2.outputs.major }}"
+          echo "Minor: ${{ steps.jjversion2.outputs.minor }}"
+          echo "Patch: ${{ steps.jjversion2.outputs.patch }}"
+          echo "MajorMinorPatch: ${{ steps.jjversion2.outputs.majorMinorPatch }}"
+          echo "Sha: ${{ steps.jjversion2.outputs.sha }}"
+          echo "ShortSha: ${{ steps.jjversion2.outputs.shortSha }}"

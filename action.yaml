@@ -4,6 +4,11 @@ author: "jjliggett"
 branding:
   icon: "tag"
   color: "blue"
+inputs:
+  version:
+    type: "string"
+    required: false
+    default: "v0.3.30"
 outputs:
   major:
     description: "Major version"
@@ -30,18 +35,16 @@ runs:
     - run: echo $env:RUNNER_OS
       shell: pwsh
     - name: Download jjversion-gha-output GitHub Release executable
-      env:
-        VERSION: v0.3.30
       run: |
         if ($env:RUNNER_OS -eq "Windows")
         {
-          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/$env:VERSION/jjversion-ghao.exe -L --output jjversion-gha-output.exe
+          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/${{ inputs.version }}/jjversion-ghao.exe -L --output jjversion-gha-output.exe
         } elseif ($env:RUNNER_OS -eq "macOS")
         {
-          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/$env:VERSION/jjversion-ghao-darwin -L --output jjversion-gha-output
+          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/${{ inputs.version }}/jjversion-ghao-darwin -L --output jjversion-gha-output
           chmod +x jjversion-gha-output
         } else {
-          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/$env:VERSION/jjversion-ghao -L --output jjversion-gha-output
+          curl https://github.com/jjliggett/jjversion-gha-output/releases/download/${{ inputs.version }}/jjversion-ghao -L --output jjversion-gha-output
           chmod +x jjversion-gha-output
         }
       shell: pwsh
