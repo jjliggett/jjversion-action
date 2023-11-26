@@ -2,6 +2,8 @@
 
 jjversion-action is a composite GitHub action that uses the Go package [jjliggett/jjversion](https://github.com/jjliggett/jjversion) to calculate a version for a git repository and parse version attributes as GitHub Action outputs.
 
+The action downloads the [jjliggett/jjversion-gha-output](https://github.com/jjliggett/jjversion-gha-output) executable and runs the executable. The executable extends the `jjversion` package, saving version information in GitHub step outputs.
+
 ## Usage
 
 For this action to work properly, you must create a versioning.yaml file in your repository and checkout your repository in your workflow with ```fetch-depth: 0``` to fetch all history for all tags and branches. Configuration information for the versioning.yaml file can be found in the <https://github.com/jjliggett/jjversion> repository.
@@ -29,7 +31,7 @@ An example usage can be seen below:
           fetch-depth: 0
       - name: Get version
         id: jjversion
-        uses: jjliggett/jjversion-action@ce54a38a5fae3f0f2a96acc046b68c66d3822042
+        uses: jjliggett/jjversion-action@d7de52a0e5ba3bd8ab81d1a478c85c7cac1244ba
       - name: Display jjversion outputs
         run: |
           echo "Major: ${{ steps.jjversion.outputs.major }}"
@@ -39,6 +41,31 @@ An example usage can be seen below:
           echo "Sha: ${{ steps.jjversion.outputs.sha }}"
           echo "ShortSha: ${{ steps.jjversion.outputs.shortSha }}"
 ```
+
+An optional parameter is available to specify the `jjversion-gha-output` executable version and override the default configured within the action source code - `version`. This can enable you to use a more updated version of the executable before this action is updated:
+
+```yaml
+    steps:
+      - name: Checkout
+        uses: actions/checkout@230611dbd0eb52da1e1f4f7bc8bb0c3a339fc8b7
+        with:
+          fetch-depth: 0
+      - name: Get version
+        id: jjversion
+        uses: jjliggett/jjversion-action@d7de52a0e5ba3bd8ab81d1a478c85c7cac1244ba
+        with:
+          version: v0.3.31
+      - name: Display jjversion outputs
+        run: |
+          echo "Major: ${{ steps.jjversion.outputs.major }}"
+          echo "Minor: ${{ steps.jjversion.outputs.minor }}"
+          echo "Patch: ${{ steps.jjversion.outputs.patch }}"
+          echo "MajorMinorPatch: ${{ steps.jjversion.outputs.majorMinorPatch }}"
+          echo "Sha: ${{ steps.jjversion.outputs.sha }}"
+          echo "ShortSha: ${{ steps.jjversion.outputs.shortSha }}"
+```
+
+You can see the `jjversion-gha-output` releases and changelog here: <https://github.com/jjliggett/jjversion-gha-output/releases/>
 
 ## Licensing
 
