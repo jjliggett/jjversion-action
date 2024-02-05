@@ -26,12 +26,12 @@ An example usage can be seen below:
 ```yaml
     steps:
       - name: Checkout
-        uses: actions/checkout@230611dbd0eb52da1e1f4f7bc8bb0c3a339fc8b7
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           fetch-depth: 0
       - name: Get version
         id: jjversion
-        uses: jjliggett/jjversion-action@d7de52a0e5ba3bd8ab81d1a478c85c7cac1244ba
+        uses: jjliggett/jjversion-action@d985078849e10d73a55b8c7b0aa713349a03c156 # v0.6.10
       - name: Display jjversion outputs
         run: |
           echo "Major: ${{ steps.jjversion.outputs.major }}"
@@ -47,14 +47,14 @@ An optional parameter is available to specify the `jjversion-gha-output` executa
 ```yaml
     steps:
       - name: Checkout
-        uses: actions/checkout@230611dbd0eb52da1e1f4f7bc8bb0c3a339fc8b7
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           fetch-depth: 0
       - name: Get version
         id: jjversion
-        uses: jjliggett/jjversion-action@d7de52a0e5ba3bd8ab81d1a478c85c7cac1244ba
+        uses: jjliggett/jjversion-action@d985078849e10d73a55b8c7b0aa713349a03c156 # v0.6.10
         with:
-          version: v0.3.31
+          version: v0.3.37
       - name: Display jjversion outputs
         run: |
           echo "Major: ${{ steps.jjversion.outputs.major }}"
