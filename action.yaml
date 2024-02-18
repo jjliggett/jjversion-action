@@ -8,7 +8,7 @@ inputs:
   version:
     type: "string"
     required: false
-    default: "v0.3.37"
+    default: "v0.3.43"
 outputs:
   major:
     description: "Major version"
