@@ -31,7 +31,7 @@ An example usage can be seen below:
           fetch-depth: 0
       - name: Get version
         id: jjversion
-        uses: jjliggett/jjversion-action@d985078849e10d73a55b8c7b0aa713349a03c156 # v0.6.10
+        uses: jjliggett/jjversion-action@792eedc302b25e47c032768ed951ca1c6abb5d3d # v0.6.11
       - name: Display jjversion outputs
         run: |
           echo "Major: ${{ steps.jjversion.outputs.major }}"
@@ -52,7 +52,7 @@ An optional parameter is available to specify the `jjversion-gha-output` executa
           fetch-depth: 0
       - name: Get version
         id: jjversion
-        uses: jjliggett/jjversion-action@d985078849e10d73a55b8c7b0aa713349a03c156 # v0.6.10
+        uses: jjliggett/jjversion-action@792eedc302b25e47c032768ed951ca1c6abb5d3d # v0.6.11
         with:
           version: v0.3.43
       - name: Display jjversion outputs
