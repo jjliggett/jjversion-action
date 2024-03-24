@@ -54,7 +54,7 @@ An optional parameter is available to specify the `jjversion-gha-output` executa
         id: jjversion
         uses: jjliggett/jjversion-action@792eedc302b25e47c032768ed951ca1c6abb5d3d # v0.6.11
         with:
-          version: v0.3.43
+          version: v0.3.46
       - name: Display jjversion outputs
         run: |
           echo "Major: ${{ steps.jjversion.outputs.major }}"
